@@ -1,0 +1,323 @@
+\documentclass[11pt]{article}
+
+\newcommand{\yourname}{Gabriel Peter}
+\newcommand{\yourcollaborators}{}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\def\comments{0}
+
+%format and packages
+
+%\usepackage{algorithm, algorithmic}
+\usepackage{algpseudocode}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{verbatim}
+\usepackage[margin=1.0in]{geometry}
+\usepackage{microtype}
+\usepackage{kpfonts}
+\usepackage{palatino}
+	\DeclareMathAlphabet{\mathtt}{OT1}{cmtt}{m}{n}
+	\SetMathAlphabet{\mathtt}{bold}{OT1}{cmtt}{bx}{n}
+	\DeclareMathAlphabet{\mathsf}{OT1}{cmss}{m}{n}
+	\SetMathAlphabet{\mathsf}{bold}{OT1}{cmss}{bx}{n}
+	\renewcommand*\ttdefault{cmtt}
+	\renewcommand*\sfdefault{cmss}
+	\renewcommand{\baselinestretch}{1.06}
+\usepackage[usenames,dvipsnames]{xcolor}
+\definecolor{DarkGreen}{rgb}{0.15,0.5,0.15}
+\definecolor{DarkRed}{rgb}{0.6,0.2,0.2}
+\definecolor{DarkBlue}{rgb}{0.2,0.2,0.6}
+\definecolor{DarkPurple}{rgb}{0.4,0.2,0.4}
+\usepackage[pdftex]{hyperref}
+\hypersetup{
+	linktocpage=true,
+	colorlinks=true,				% false: boxed links; true: colored links
+	linkcolor=DarkBlue,		% color of internal links
+	citecolor=DarkBlue,	% color of links to bibliography
+	urlcolor=DarkBlue,		% color of external links
+}
+
+\usepackage[boxruled,vlined,nofillcomment]{algorithm2e}
+	\SetKwProg{Fn}{Function}{\string:}{}
+	\SetKwFor{While}{While}{}{}
+	\SetKwFor{For}{For}{}{}
+	\SetKwIF{If}{ElseIf}{Else}{If}{:}{ElseIf}{Else}{:}
+	\SetKw{Return}{Return}
+	
+
+%enclosure macros
+\newcommand{\paren}[1]{\ensuremath{\left( {#1} \right)}}
+\newcommand{\bracket}[1]{\ensuremath{\left\{ {#1} \right\}}}
+\renewcommand{\sb}[1]{\ensuremath{\left[ {#1} \right\]}}
+\newcommand{\ab}[1]{\ensuremath{\left\langle {#1} \right\rangle}}
+
+%probability macros
+\newcommand{\ex}[2]{{\ifx&#1& \mathbb{E} \else \underset{#1}{\mathbb{E}} \fi \left[#2\right]}}
+\newcommand{\pr}[2]{{\ifx&#1& \mathbb{P} \else \underset{#1}{\mathbb{P}} \fi \left[#2\right]}}
+\newcommand{\var}[2]{{\ifx&#1& \mathrm{Var} \else \underset{#1}{\mathrm{Var}} \fi \left[#2\right]}}
+
+%useful CS macros
+\newcommand{\poly}{\mathrm{poly}}
+\newcommand{\polylog}{\mathrm{polylog}}
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\pmo}{\{\pm1\}}
+\newcommand{\getsr}{\gets_{\mbox{\tiny R}}}
+\newcommand{\card}[1]{\left| #1 \right|}
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\negl}{\mathrm{negl}}
+\newcommand{\eps}{\varepsilon}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\newcommand{\eqand}{\qquad \textrm{and} \qquad}
+\newcommand{\ind}[1]{\mathbb{I}\{#1\}}
+\newcommand{\sslash}{\ensuremath{\mathbin{/\mkern-3mu/}}}
+
+%mathbb
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+%mathcal
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+%theorem macros
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{clm}[thm]{Claim}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{coro}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+
+
+\newcommand{\instructor}{Drew van der Poel}
+\newcommand{\hwnum}{1}
+\newcommand{\hwdue}{Friday, May 21 at 11:59pm via \href{https://gradescope.com/courses/266585}{Gradescope}}
+
+\theoremstyle{theorem}
+\newtheorem{prob}{Problem}
+\newtheorem{sol}{Solution}
+
+\definecolor{cit}{rgb}{0.05,0.2,0.45} 
+\newcommand{\solution}{\medskip\noindent{\color{DarkBlue}\textbf{Solution:}}}
+
+\begin{document}
+{\Large 
+\begin{center}{CS3000: Algorithms \& Data} --- Summer I '21 --- \instructor \end{center}}
+{\large
+\vspace{10pt}
+\noindent Homework~\hwnum \vspace{2pt}\\
+Due~\hwdue}
+
+\bigskip
+{\large
+\noindent Name: \yourname \vspace{2pt}\\ Collaborators: \yourcollaborators}
+
+\vspace{15pt}
+\begin{itemize}
+
+\item Make sure to put your name on the first page.  If you are using the \LaTeX~template we provided, then you can make sure it appears by filling in the \texttt{yourname} command.
+
+\item This assignment is due~\hwdue.  No late assignments will be accepted.  Make sure to submit something before the deadline.
+
+\item Solutions must be typeset in \LaTeX.  If you need to draw any diagrams, you may draw them by hand as long as they are embedded in the PDF.  I recommend using the source file for this assignment to get started.
+
+\item I encourage you to work with your classmates on the homework problems. \emph{If you do collaborate, you must write all solutions by yourself, in your own words.}  Do not submit anything you cannot explain.  Please list all your collaborators in your solution for each problem by filling in the \texttt{yourcollaborators} command.
+
+\item Finding solutions to homework problems on the web, or by asking students not enrolled in the class is strictly forbidden.
+
+\end{itemize}
+
+\newpage
+
+\begin{prob} Proof by Induction (8 points) \end{prob}
+
+
+Prove the following statement by induction: For every $n \in \N$, $\sum_{i=1}^{n} i^2 = \frac{n(n+1)(2n+1)}{6}$
+
+\solution \\
+
+\emph{Base:} $n = 0$  such that $H(0) = 0^2 = \frac{(0)(0+1)(2(0)+1)}{6} = 0$ Pass! \\
+
+\emph{Weak Induction:} \\
+
+ $IH: H(k-1) =  \sum_{i=1}^{n-1} i^2 = \frac{(n-1)(n+1-1)(2(n-1)+1)}{6}  = \frac{(n)(n-1)(2n-1)}{6} = \frac{2n^3-3n^2+n}{6}$
+	
+ $H(k) = \sum_{i=1}^{n} i^2 =  \sum_{i=1}^{n-1} i^2  + n^2=  \frac{n(n-1)(2n-1)}{6} + n^2 = H(k-1) + n^2 =  \frac{2n^3+3n^2+n}{6} =  \frac{n(n+1)(2n+1)}{6}$ Pass!
+
+
+\newpage
+\begin{prob} Mystery Code (11 points) \end{prob}
+
+You encounter the following mysterious piece of code.
+
+\begin{algorithm}[H]
+\caption{Mystery Function}
+\Fn{$F(a,n)$}{
+  \If{$n=0$}{\Return $(1,a)$}
+  \Else{
+    $b = 1$\\
+    \For{$i$ from 1 to $2n$}{
+      $b = b \cdot a$}
+    $(u,v) \gets F(a, n-1)$\\
+    \Return $(u \cdot b/a, v \cdot b \cdot a)$}
+}
+\end{algorithm}
+
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{[3 points]} What are the results of $F(a,3)$, $F(a,4)$, and $F(a,5)$.  You do not need to justify your answers.
+
+\solution
+
+$F(a,3) = (a^{9}, a^{16})$\\
+$F(a,4) = (a^{16}, a^{25})$\\
+$F(a,5) = (a^{25}, a^{36})$\\
+$F(a, n) = (a^{n^2}, a^{(n+1)^2})$
+
+\item \textbf{[8 points]} What does the code do in general, when given input integer $n
+  \ge 0$? Prove your assertion by induction on $n$.
+
+\solution \\
+
+Claim: $F(a, n) = (a^{n^2}, a^{(n+1)^2})$ where $n \ge 0$ \\
+Base: $n = 0 \rightarrow F(a, 0) = (1,a)$ AND $(a^{0^2}, a^{(0+1)^2}) = (1, a)$ \\
+Induction: We assume that $F(a, n-1) = (a^{(n-1)^2}, a^{(n)^2})$ is true for all $n \ge 0$\\
+
+Provided from the pseudocode, we hit the else of our function and return:
+
+\tab Thus, $F(a, n) = (u * b/a, v *ba)$ where $b = a^{2n}$ and $(u, v) = F(a, n-1) = (a^{(n-1)^2}, a^{(n)^2})$  \\
+\tab $F(a, n) = (u * b/a, v *ba) =  (a^{(n-1)^2} * a^{2n}/a, a^{(n)^2} * a^{2n}*a)$ \\
+\tab \tab $= (a^{n^2 - 2n +1} * a^{2n} * a^{-1}, a^{n^2} * a^{2n} * a^1)$ \\
+\tab \tab $= (a^{n^2}, a^{(n+1)^2})$ via solving quadratic and is now equal to our claim! Fin.
+\end{enumerate}
+
+\newpage
+\begin{prob} Stable Matching (14 points) \end{prob}
+
+
+\begin{enumerate}[label=(\alph*)]
+\item  \textbf{[6 points]} State the matching you obtain from running the Gale-Shapley algorithm on the following instance:
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+hospital & 1 & 2 & 3  \\
+\hline
+$h_1$ & $d_2$ & $d_1$ & $d_3$   \\
+$h_2$ & $d_2$ & $d_3$ & $d_1$   \\
+$h_3$ & $d_1$ & $d_3$ & $d_2$   \\
+\hline
+\end{tabular}
+\hspace{1in}
+\begin{tabular}{|l|c|c|c|}
+\hline
+doctor & 1 & 2 & 3  \\
+\hline
+$d_1$ & $h_2$ & $h_3$ & $h_1$   \\
+$d_2$ & $h_3$ & $h_1$ & $h_2$   \\
+$d_3$ & $h_1$ & $h_3$ & $h_2$    \\
+\hline
+\end{tabular}
+\end{center}
+
+ Is the stable matching you found the only stable matching? If not, provide an example of another stable matching.
+
+\solution
+
+$ M = (h_1, d_2), (h_2, d_3), (h_3, d_1)$
+
+\item \textbf{[8 points]} Given a set of preferences for $n$ doctors and $n$ hospitals, consider the stable matchings found via the following processes:
+
+\begin{enumerate}
+\item Run the standard Gale-Shapley algorithm with hospitals making offers to doctors. Let this matching be $M_1$.
+\item Run Gale-Shapley again, but this time flip the roles of the hospitals and doctors in the algorithm, so that the doctors make offers to the hospitals. Let this matching be $M_2$.
+
+\end{enumerate}
+
+Prove the following claim:
+
+\emph{If there is more than one stable matching, then $M_1 \neq M_2$.}
+
+To do this, you may use the following terminology and Lemma 1.7 from the text. Hospital $h$ is a \emph{valid partner} of doctor $d$ if there is a stable matching the contains the pair $(h,d)$ (and vice versa). Doctor $d$ is the \emph{best/worst valid partner} of $h$ if every other valid partner is ranked lower/higher than $d$ in $h$'s preferences. When hospitals (doctors) propose in Gale-Shapley, each hospital (doctor) is paired with their best valid partner (Lemma 1.7). 
+
+\solution \\
+
+Proof by contradiction: Assume $M_1 = M_2$. \\
+
+According to Lemma 1.7, "each hospital is paired with their best valid partner." \\
+
+
+
+
+If  $M_1 = M_2$ then the best matchings for hospitals is equivalent to the best matchings for doctors. \\
+The term "best" asserts that it was the only matching possible. \\
+Thus, we can assume they reduce to a single matching due to their strict equivalence.
+This is a contradiction as there are now not two stable matching's but one that occurs twice.
+
+Therefore: $M_1 \neq M_2$, if there is more than one stable matching. \\
+
+
+
+
+\end{enumerate}
+
+
+
+\newpage
+\begin{prob} Asymptotic Order of Growth (18 points) \end{prob}
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{[10 points]} Rank the following functions in increasing order of asymptotic growth rate.  That is, find an ordering $f_1, f_2, \ldots, f_{10}$ of the functions so that $f_i = O(f_{i+1})$. No justification is required.
+
+\begin{center}
+\begin{tabular}{ccccc}
+$n^3$ & $\sqrt{n}$ & $n!$ & $12^n$ & $\log_2 (n!)$  \\
+$2^{4n}$ & $100 n^{3/2}$ & $10n$ & $2^{\log_3 n}$ & $\log_2^3 n$
+\end{tabular}
+\end{center}
+
+\solution \\
+
+$\sqrt{n}, 2^{\log_3 n}, 10n, \log_2^3 n, 100n^{3/2}, \log_2 (n!), n^3, 12^n, 2^{4n}, n!$
+
+\item  \textbf{[8 points]} Suppose $f(n), g(n), h(n)$ are non-decreasing, non-negative functions. Decide whether you think the following statement is true or false and give a proof or a counterexample.
+
+If $f(n) = \Omega(h(n))$ and $g(n) = O(h(n))$, then $f(n) = \Omega(g(n))$.
+
+\solution \\
+Given that $f(n) = \Omega(g(n)) \rightarrow f(n) \ge c * g(n)$ and $f(n) = O(g(n)) \rightarrow f(n) \le c * g(n)$ from Lecture 3/4 notes. \\
+
+ $f(n) = \Omega(h(n)) \rightarrow f(n) \ge c * h(n)$ \\
+ $g(n) = O(h(n)) \rightarrow g(n) \le c * h(n)$ \\
+ Therefore, if we merge: $f(n) \ge c * h(n) \ge g(n)$ \\\\
+ Transitively, $f(n) \ge g(n) \rightarrow f(n) = \Omega(g(n))$
+
+\end{enumerate}
+
+
+
+\end{document}
