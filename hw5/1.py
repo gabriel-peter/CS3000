@@ -13,111 +13,129 @@ class Graph:
 	def addEdge(self,u,v):
 		self.graph[u].append(v)
 
-	# A function used by DFS
-	def DFSUtil(self,v,visited):
-		# Mark the current node as visited and print it
-		visited[v]= True
-		print(v, end=' ')
-		#Recur for all the vertices adjacent to this vertex
-		for i in self.graph[v]:
-			if visited[i]==False:
-				self.DFSUtil(i,visited)
+def getTranspose(g):
+    g_r = Graph(g.V)
 
+    # Recur for all the vertices adjacent to this vertex
+    for i in g.graph:
+        for j in g.graph[i]:
+            g_r.addEdge(j,i)
+    return g_r
 
-	def fillOrder(self,v,visited, stack):
-		# Mark the current node as visited
-		visited[v]= True
-		#Recur for all the vertices adjacent to this vertex
-		for i in self.graph[v]:
-			if visited[i]==False:
-				self.fillOrder(i, visited, stack)
-		stack.append(v)
+def DFS(node, graph):
+	explored = defaultdict(int)
+	discovery = {}
+	finish = {}
+	parent = {}
+	parent[node] = None
+	clock = 1
+
+	def DFShelper(node, graph, clock):
+		explored[node] = 1
+		discovery[node] = clock
+		clock += 1
+		for v in graph[node]:
+			if explored[v] == 0:
+				parent[v] = node
+				DFShelper(v, graph, clock)
+
+		finish[node] = clock
+		clock += 1
 	
+	DFShelper(node, graph, clock)
 
-	# Function that returns reverse (or transpose) of this graph
-	def getTranspose(self):
-		g = Graph(self.V)
-
-		# Recur for all the vertices adjacent to this vertex
-		for i in self.graph:
-			for j in self.graph[i]:
-				g.addEdge(j,i)
-		return g
-
-
-
-	# The main function that finds and prints all strongly
-	# connected components
-	def printSCCs(self):
-		
-		stack = []
-		# Mark all the vertices as not visited (For first DFS)
-		visited =[False]*(self.V)
-		# Fill vertices in stack according to their finishing
-		# times
-		for i in range(self.V):
-			if visited[i]==False:
-				self.fillOrder(i, visited, stack)
-
-		# Create a reversed graph
-		gr = self.getTranspose()
-		
-		# Mark all the vertices as not visited (For second DFS)
-		visited =[False]*(self.V)
-
-		# Now process all vertices in order defined by Stack
-		while stack:
-			i = stack.pop()
-			if visited[i]==False:
-				gr.DFSUtil(i, visited) # RECENT CHANGE
-                # break
-				print('')
+	return finish, parent
                 
 
 # Create a graph given in the above diagram
-# g = Graph(6)
-# g.addEdge(1, 2)
-# g.addEdge(1, 3)
-# g.addEdge(1, 4)
-# g.addEdge(1, 5)
+g = Graph(6)
+g.addEdge(1, 2)
+g.addEdge(1, 3)
+g.addEdge(1, 4)
+g.addEdge(1, 5)
 
-# g.addEdge(4, 1)
-# g.addEdge(4, 2)
-# g.addEdge(4, 3)
-# g.addEdge(4, 5)
+g.addEdge(4, 1)
+g.addEdge(4, 2)
+g.addEdge(4, 3)
+g.addEdge(4, 5)
 
-# g.addEdge(5, 1)
-# g.addEdge(5, 2)
-# g.addEdge(5, 3)
-# g.addEdge(5, 4)
+g.addEdge(5, 1)
+g.addEdge(5, 2)
+g.addEdge(5, 3)
+g.addEdge(5, 4)
 
-g=Graph(9)
-g.addEdge('a','e')
-g.addEdge('a','b')
+# g=Graph(9)
 
-g.addEdge('b','c')
+# g.addEdge('e','g')
+# g.addEdge('e','b')
+# g.addEdge('e','c')
+# g.addEdge('e','f')
 
-g.addEdge('c','a')
+# g.addEdge('a','e')
+# g.addEdge('a','b')
 
-g.addEdge('d','a')
-g.addEdge('d','e')
+# g.addEdge('b','c')
 
-g.addEdge('e','g')
-g.addEdge('e','b')
-g.addEdge('e','c')
-g.addEdge('e','f')
+# g.addEdge('c','a')
 
-g.addEdge('f','c')
+# g.addEdge('d','a')
+# g.addEdge('d','e')
 
-g.addEdge('g','d')
-g.addEdge('g','h')
+# g.addEdge('f','c')
 
-g.addEdge('h','e')
-g.addEdge('h','i')
+# g.addEdge('g','d')
+# g.addEdge('g','h')
 
-g.addEdge('i','f')
+# g.addEdge('h','e')
+# g.addEdge('h','i')
 
-print ("Following are strongly connected components " +
-						"in given graph")
-g.printSCCs()
+# g.addEdge('i','f')
+
+
+# g = Graph(8)
+# g.addEdge('a', 'b')
+# g.addEdge('b', 'e')
+# g.addEdge('b', 'c')
+# g.addEdge('b', 'f')
+
+# g.addEdge('c', 'g')
+# g.addEdge('c', 'd')
+
+# g.addEdge('d', 'h')
+# g.addEdge('d', 'c')
+
+# g.addEdge('e', 'a')
+# g.addEdge('e', 'f')
+# g.addEdge('f', 'g')
+# g.addEdge('g', 'f')
+
+# g.addEdge('h', 'g')
+
+# def SCC(G):
+
+rev = getTranspose(g)
+finish, parent = DFS(1, rev.graph)
+print(finish, parent)
+c = 1
+comp = {k:None for k in g.graph.keys()}
+print(comp)
+for u,x in sorted(finish.items(), key=lambda x:x[1], reverse=True):
+	print(u)
+	if comp[u] == None:
+		_, S = DFS(u, g.graph) 
+		print('S', S)
+		for v in S.keys():
+			comp[v] = c
+		c +=1
+
+print(comp)
+
+
+# g = Graph(5)
+# g.addEdge('a', 'b')
+# g.addEdge('b', 'c')
+# g.addEdge('c', 'd')
+# g.addEdge('d', 'e')
+
+
 

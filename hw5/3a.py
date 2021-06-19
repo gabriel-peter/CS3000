@@ -11,15 +11,24 @@ class Graph:
 
 
 explored = defaultdict(int)
+discovery = {}
+finish = {}
 parent = {}
 parent['a'] = None
+clock = 1
 
 def DFS(node, graph):
+    global clock
     explored[node] = 1
+    discovery[node] = clock
+    clock += 1
     for v in graph[node]:
         if explored[v] == 0:
             parent[v] = node
             DFS(v, graph)
+
+    finish[node] = clock
+    clock += 1
 
 
 g = Graph(9)
@@ -50,4 +59,6 @@ g.addEdge('i','f')
 
 DFS('a', g.graph)
 print(parent)
+print('discovery', discovery)
+print('finish', finish)
 

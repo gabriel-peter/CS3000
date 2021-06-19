@@ -14,6 +14,7 @@
 \usepackage{enumitem}
 \usepackage{framed}
 \usepackage{verbatim}
+\usepackage{listings}
 \usepackage[margin=1.0in]{geometry}
 \usepackage{microtype}
 \usepackage{multirow}
@@ -234,19 +235,31 @@ Call a person $i$ a {\em powerbroker}\/ if for every other person $j
     what it needs to output.\footnote{\textbf{Check:} Make sure you
       have this right, before you move on to designing the algorithm.}
 
-\solution
+\solution \\
+
+The algorithm simply needs a provided graph in the form of adjacency lists. It will then output a list of the vertices that compose the list of powerbrokers (aka the source SCC, which will be explained later.)
 
     
   \item  \textbf{(8 points)} Describe your algorithm.  You may invoke or
     modify any of the graph traversal algorithms studied in class.
 
-\solution
+\solution \\
+
+\lstinputlisting[language=Python]{1_pseudo.py}
+This algorithm goes under the basis that all powerbrokers will be in a SCC. Additionally, if these vertices need to have possible paths to all other nodes, then we can also be confident that this is a sink component. (more in iii.) \\\\
+Thus, we first need to find all SCCs using inspiration for the linear-time algorithm discussed in class. Based on the nature of the alogrithm, which disvoers the sink components first, we know that the last SCC is the source and therefore contains the power brokers.
 
   \item \textbf{(8 points)}
     Justify the correctness of your algorithm.  Your justification does
     not need to be long or formal, just convincing.
 
-\solution
+\solution \\ 
+
+As mentioned before, we can be certain that all powerbrokers are in the same SCC because they must be connected to each in order to satisfy the requirement that:\\\\
+"Call a person $i$ a {\em powerbroker}\/ if for every other person $j
+\in V$, there is a path from $i$ to $j$ in $G$."\\\\
+Additionally, the SCC in question must be the source SCC because a source component, has a path to all other nodes which is necesarry for a power broker.\\\\
+Therfore, {powerbrokers} $\leftrightarrow SCC_{source}$ 
 
   \item  \textbf{(4 points)} Analyze the running time of your algorithm in terms of the
     number of vertices $n$ and number of edges $m$ of $G$.
@@ -255,7 +268,17 @@ Call a person $i$ a {\em powerbroker}\/ if for every other person $j
     credit.  See if you can design an algorithm with $O(n + m)$
     running time using strongly connected components.)
 
-\solution 
+\solution \\
+
+The runtime of this algorithm is identical to the SCC mentioned in class, but simply more things are cached for later reference:\\\\
+\begin{enumerate}
+	\item tranposing the graph: $O(m)$
+	\item DFS on the tranposed: $O(n + m)$
+	\item comp init: $O(n)$
+	\item Nested for-loops assigning SCC's to vertices: $O(n + m)$
+\end{enumerate}
+
+TOTAL: $O(m) + O(n + m) + O(n) + O(n + m) = O(n + m)$
 
   \end{enumerate}
 \end{enumerate}
@@ -301,25 +324,47 @@ Your algorithm should run in $O(n+m)$ time.
 \begin{enumerate}[label=(\alph*)]
 \item  \textbf{(6 points)} Describe in 1-3 English sentences how you will determine the earliest possible completion times for the tasks.
 
-\solution
+\solution \\ I will determine the the earliest possible completion of each node by running a modified DFS algorithm
+for topological sorting, which has an additional modification that labels each node's topology as their cumulative time weights such that we keep track of the current max accumulation of times for a DFS.
 
 \item  \textbf{(6 points)} Describe your algorithm in pseudocode.  You may make use of any algorithm we've seen in class without describing how it works, but you should clearly state what you are assuming about the algorithm.
 
-\solution
+\solution \\
+
+\lstinputlisting[language=Python]{2.py}
+The algorithm works very similar to the FastTop() mentioned in lecture 16:\\
+
+Essentially, we remove all nodes and then add their accumulated time to complete starting at the nodes
+with 0 in-degree edges. By deleting nodes, we cause others to now have 0 in-degrees and are then deleted as well. The topological times are 
+a max of the current label or the new accumulation, which denotes the soonest this node (task) can be completed after all prerequisites are finished.
+The labelings are stored in a map: `times` and from there can be easily acessed such that: $c(i) = times[i]$
 
 
 \item   \textbf{(8 points)} Justify that your algorithm outputs the earliest possible completion time for each project.  Your justification can take any form you like as long as the argument is clear and logical.
 
-\solution
+\solution \\ 
+
+Theorem: G has a topological ordering $\leftrightarrow$ G is a DAG\\
+
+As that is a provided contraint of the graph input, that it is a acyclic DAG. We know that we can get a topological ordering. 
+In a normal topological sort, know that we can get a list which is a guaranteed precedence ordering of the nodes provided.
+I alter that algorithm ever-so-slighty to maintain its correctness of topological order, but labeling them through an accumulation of their $t(i)$ value.
+We know based on the alogrithm that the accumulation will only be passed to nodes that are in the precendence of the currently deleting node,
+as the next-to-be deleted are out\_degrees of it. However, based on the configuration of the graph, we may have multiple precedences for a single node,
+and this causes a value conflict in out labeling. To solve this, we take the max(old accumulation, new accumulation) as the problem constraints mentions 
+that all preceding nodes but be completed, even in parallel. Thus, the soonest time the node have be completed is after the longest prerequisite is.
 
 \item  \textbf{(4 points)} Analyze the running time of your algorithm.  If your algorithm uses some algorithm from class as a subroutine, don't forget to include this running time in your analysis.
 
-\solution
+\solution \\ 
+The runtime of this algorithm is idential to the pseudocode's runtime of FastTop in lecture 16 as the modifications do not contribute to the asymptotic performance.
+Thus, $O(n + 3m) = O(n + m)$
 
 
 \item   \textbf{(+5 points)} - In order to better your familiarity with graph algorithms, we have created a hackerrank challenge (\href{https://www.hackerrank.com/CS3000-summer1-2021-programming-assignment-5}{https://www.hackerrank.com/CS3000-summer1-2021-programming-assignment-5}). Please implement your algorithm and submit it to the challenge. Please list your username below. Because this problem is bonus, the course staff will generally refrain from providing assistance here.
 
-\solution
+\solution \\
+peter\_g
 
 \end{enumerate}
 
@@ -372,12 +417,12 @@ Consider running depth-first search on this graph starting from node $a$.  When 
 
 Lecture 15...
 
-(a,b): \\
+(a,b): forward \\
 (a,e): tree \\
 
-(b,c):\\
+(b,c): cross \\
 
-(c,a):\\
+(c,a): cross \\
 
 (d,a):\\
 (d,e):\\
@@ -399,14 +444,27 @@ Lecture 15...
 
 \item  \textbf{(5 points)} Give the discovery and finish times of all vertices
 
-\solution
+\solution \\ 
+
+\begin{tabular}{||ccc||}
+	Vertex & Discovery & Finish\\
+	\hline
+	a & 1 & 18 \\
+	b & 15 & 16 \\
+	c & 9 & 10 \\
+	d & 4 & 5 \\
+	e & 2 & 17 \\
+	f & 8 & 11 \\ 
+	g & 3 & 14 \\
+	h & 6 & 13 \\ 
+	i & 7 & 12 \\ 
+\end{tabular}
+
 
 \item  \textbf{(5 points)} Is this graph a DAG?  If so, give a topological ordering.
 
 \solution \\ 
-
-Yes,\\
-$[a, e, g, h, i, f, d, a, b, c]$
+No, the exist no node that has $in\_degree(v) = 0$. Therefore, a cycle is in this graph, which a DAG cannot have being acyclic.
 
 
 
@@ -451,11 +509,12 @@ Use Dijkstra's algorithm the single-source shortest path problem on the followin
 \hline
 Node & 1 & 2 & 3 & 4 & 5 \\
 \hline
-Distance & & &  & &  \\
-Parent & & & & &  \\
+Distance & 0 & 8 & 1 & 6 & 3  \\
+Parent   & $\emptyset$ & 1 & 1 & 4 & 3 \\
 \hline
 \end{tabular}
 \end{center}
 
+TODO ATTACH SCRATCH WORK
 
 \end{document}
