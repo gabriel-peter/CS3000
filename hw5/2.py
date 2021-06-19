@@ -1,24 +1,22 @@
-from collections import defaultdict
-
+# Main algo method which returns mappings of
+# min times needed to complete a node
 def FastTop(graph, weights):
-    times = defaultdict(int)
+    times = {k:0 for k in graph.keys()}
     queue = []     #Initialize a queue
     in_deg = {k:0 for k in graph.keys()}
 
+    # Removes a node and adjusts values that are
+    # affected from its deletion (times, in_deg)
     def deleteNode(node, time_acc):
-        # print('REMOVED NODE', node, 'TIME ACC', time_acc)
-        times_acc = max(time_acc, times[node])    
+        time_acc = max(time_acc, times[node]
+                    + weights[int(node)-1])    
         times[node] = time_acc
         for w in graph[node]:
+            times[w] = max(times[node], times[w])
             in_deg[w] -= 1
         for w in graph[node]:
-            if in_deg[w] == -1: continue
             if in_deg[w] == 0:
-                # queue.append(w)
-                deleteNode(w, time_acc + weights[int(w)-1])
-                in_deg[w] -= 1
-            
-        return time_acc
+                deleteNode(w, time_acc)
 
     # Marks all nodes
     for node in graph.keys():
@@ -34,6 +32,6 @@ def FastTop(graph, weights):
     #Queue starts.
     while queue:
         u = queue.pop(0)
-        deleteNode(u, weights[int(u)-1])
+        deleteNode(u, 0)
 
     return times

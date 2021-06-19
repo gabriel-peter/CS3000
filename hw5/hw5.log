@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.5.20)  18 JUN 2021 20:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.5.20)  19 JUN 2021 13:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1126,169 +1126,144 @@ Underfull \hbox (badness 10000) in paragraph at lines 246--247
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2020/03/24 1.8d listings language file
-) (/Users/gabrielpeter/Algorithms/hw5/1_pseudo.py
-Overfull \hbox (74.46405pt too wide) in paragraph at lines 1--2
-[][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[2]
-Overfull \hbox (67.894pt too wide) in paragraph at lines 6--8
-[][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (48.18384pt too wide) in paragraph at lines 28--29
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (2.19347pt too wide) in paragraph at lines 33--34
-[][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-[3]
-LaTeX Font Info:    Trying to load font information for OMS+ppl on input line 50.
+) (/Users/gabrielpeter/Algorithms/hw5/1v2.py [2]
+LaTeX Font Info:    Trying to load font information for OMS+ppl on input line 8.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/omsppl.fd
 File: omsppl.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ppl/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 50.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 8.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 249--251
+Underfull \hbox (badness 10000) in paragraph at lines 255--256
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 256--257
+Underfull \hbox (badness 10000) in paragraph at lines 257--262
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 258--263
+Underfull \hbox (badness 10000) in paragraph at lines 257--262
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 258--263
+Underfull \hbox (badness 10000) in paragraph at lines 257--262
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 272--273
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 258--263
+Underfull \hbox (badness 10000) in paragraph at lines 274--276
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 274--276
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 271--272
+Overfull \vbox (2.72908pt too high) detected at line 316
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 333--334
+
+ []
+
+(/Users/gabrielpeter/Algorithms/hw5/2.py [5])
+Underfull \hbox (badness 10000) in paragraph at lines 336--337
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--275
+Underfull \hbox (badness 10000) in paragraph at lines 346--347
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 273--275
+Underfull \hbox (badness 10000) in paragraph at lines 348--349
 
  []
 
-[5]
-Overfull \vbox (2.72908pt too high) detected at line 315
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 332--333
-
- []
-
-(/Users/gabrielpeter/Algorithms/hw5/2.py [6])
-Underfull \hbox (badness 10000) in paragraph at lines 335--336
+[6] [7]
+Underfull \hbox (badness 10000) in paragraph at lines 417--418
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 345--346
+Underfull \hbox (badness 10000) in paragraph at lines 421--423
 
  []
 
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 347--348
+
+Underfull \hbox (badness 10000) in paragraph at lines 424--425
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 426--427
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 428--430
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 431--435
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 436--437
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 438--440
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 441--443
 
  []
 
 [8]
-Underfull \hbox (badness 10000) in paragraph at lines 416--417
+Underfull \hbox (badness 10000) in paragraph at lines 444--445
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 420--422
+Underfull \hbox (badness 10000) in paragraph at lines 448--449
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 423--424
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 425--426
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 427--429
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 430--434
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 435--436
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 437--439
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 440--442
-
- []
-
-[9]
-Underfull \hbox (badness 10000) in paragraph at lines 443--444
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 447--448
-
- []
-
-[10] [11] (/Users/gabrielpeter/Algorithms/hw5/hw5.aux)
+[9] [10] (/Users/gabrielpeter/Algorithms/hw5/hw5.aux)
 Package rerunfilecheck Info: File `hw5.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28027 strings out of 478994
- 489806 string characters out of 5858184
- 1035474 words of memory out of 5000000
- 44691 multiletter control sequences out of 15000+600000
- 441026 words of font info for 210 fonts, out of 8000000 for 9000
+ 27969 strings out of 478994
+ 488979 string characters out of 5858184
+ 1013469 words of memory out of 5000000
+ 44676 multiletter control sequences out of 15000+600000
+ 441797 words of font info for 212 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 113i,19n,116p,556b,2294s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 113i,19n,116p,556b,2292s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/kpfonts/jkpmi.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/kpfonts/jkpsy.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on /Users/gabrielpeter/Algorithms/hw5/hw5.pdf (11 pages, 129813 bytes).
+Output written on /Users/gabrielpeter/Algorithms/hw5/hw5.pdf (10 pages, 125239 bytes).
 PDF statistics:
- 258 PDF objects out of 1000 (max. 8388607)
- 233 compressed objects within 3 object streams
- 142 named destinations out of 1000 (max. 500000)
+ 201 PDF objects out of 1000 (max. 8388607)
+ 178 compressed objects within 2 object streams
+ 97 named destinations out of 1000 (max. 500000)
  46099 words of extra memory for PDF output out of 51595 (max. 10000000)
 

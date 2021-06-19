@@ -245,21 +245,34 @@ The algorithm simply needs a provided graph in the form of adjacency lists. It w
 
 \solution \\
 
-\lstinputlisting[language=Python]{1_pseudo.py}
-This algorithm goes under the basis that all powerbrokers will be in a SCC. Additionally, if these vertices need to have possible paths to all other nodes, then we can also be confident that this is a sink component. (more in iii.) \\\\
-Thus, we first need to find all SCCs using inspiration for the linear-time algorithm discussed in class. Based on the nature of the alogrithm, which disvoers the sink components first, we know that the last SCC is the source and therefore contains the power brokers.
+\lstinputlisting[language=Python]{1v2.py}
+
+This algorithm simply iterates a DFS at each node. With each new node discovered, 
+a global count is increased and the final accumulation is returned:\\
+If the count of nodes discovered is equivalent to the number of nodes in the graph
+ (including the start node itself) then we know it is a powerbroker because it has
+  access to everyother node in the graph. 
 
   \item \textbf{(8 points)}
     Justify the correctness of your algorithm.  Your justification does
     not need to be long or formal, just convincing.
 
-\solution \\ 
-
-As mentioned before, we can be certain that all powerbrokers are in the same SCC because they must be connected to each in order to satisfy the requirement that:\\\\
+\solution \\\\
 "Call a person $i$ a {\em powerbroker}\/ if for every other person $j
 \in V$, there is a path from $i$ to $j$ in $G$."\\\\
-Additionally, the SCC in question must be the source SCC because a source component, has a path to all other nodes which is necesarry for a power broker.\\\\
-Therfore, {powerbrokers} $\leftrightarrow SCC_{source}$ 
+
+Thefore we must find nodes that have paths to all other nodes. 
+"DFS is designed to explore all accessible nodes in a graph" (Lecture 15), and also not double count. 
+This is because we only search nodes not in our `visited` mapping.
+Therefore the cumulative amount of nodes discovered must be equal to n-1 (exluding itself).
+
+The `visited` mapping is refreshed at each call of DFS,
+as a local variable such that each DFS call starts from scratch.
+
+We have access to all nodes given our data structure as a adjacency list mapping.
+
+
+
 
   \item  \textbf{(4 points)} Analyze the running time of your algorithm in terms of the
     number of vertices $n$ and number of edges $m$ of $G$.
@@ -270,15 +283,12 @@ Therfore, {powerbrokers} $\leftrightarrow SCC_{source}$
 
 \solution \\
 
-The runtime of this algorithm is identical to the SCC mentioned in class, but simply more things are cached for later reference:\\\\
-\begin{enumerate}
-	\item tranposing the graph: $O(m)$
-	\item DFS on the tranposed: $O(n + m)$
-	\item comp init: $O(n)$
-	\item Nested for-loops assigning SCC's to vertices: $O(n + m)$
-\end{enumerate}
+The runtime for this algorithm is simply $n$ iterations of a DFS, we know that the DFS is $O(n + m)$.
+Breifly from the lecture: the DFS algorithm checked each neighbor by its collection of outward edges.
+This is done for each node, but only a recurses if the edge is of an unexplored node. 
+Therefore, its worst-case runtime is looking at each edge just once and all the nodes!
 
-TOTAL: $O(m) + O(n + m) + O(n) + O(n + m) = O(n + m)$
+TOTAL: $O(n) * O(n + m) = O(n^2 + mn)$
 
   \end{enumerate}
 \end{enumerate}
@@ -510,11 +520,28 @@ Use Dijkstra's algorithm the single-source shortest path problem on the followin
 Node & 1 & 2 & 3 & 4 & 5 \\
 \hline
 Distance & 0 & 8 & 1 & 6 & 3  \\
-Parent   & $\emptyset$ & 1 & 1 & 4 & 3 \\
+Parent   & $\emptyset$ & 1 & 1 & 5 & 3 \\
 \hline
 \end{tabular}
 \end{center}
 
-TODO ATTACH SCRATCH WORK
+ATTACHED SCRATCH WORK
+
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+Node & 1 & 2 & 3 & 4 & 5 \\
+\hline
+$d_0$ & 0 & inf & inf & inf & inf \\
+$d_1$ & 0 & $8^1$ & $1^1$ & $9^1$ & inf\\
+$d_2$ & 0 & 8 & 1 & $8^3$ & $3^3$ \\
+$d_3$ & 0 & 8 & 1 & $6^5$ & 3 \\
+$d_4$ & 0 & 8 & 1 & 6 & 3 \\
+\hline
+\end{tabular}
+$U = \{1, 3, 5, 4, 2\}$
+\end{center}
+
+
 
 \end{document}
